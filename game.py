@@ -1312,6 +1312,19 @@ def check_response_for_state_updates(
                 state, "physician_match_triggered", True
             )
 
+        if (
+                "official" in response_lower or
+                "cause of death" in response_lower or
+                "illness" in response_lower
+            ) and (
+                "queen" in response_lower
+            ):
+                state = update_state(
+                    state,
+                    "physician_gave_official_account",
+                    True
+        )
+
     if agent_name == "master":
         if "mourning" in response_lower and \
            ("irregular" in response_lower or
